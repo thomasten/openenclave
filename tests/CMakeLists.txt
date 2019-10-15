@@ -25,6 +25,7 @@ add_subdirectory(logging)
 add_subdirectory(tools)
 
 if (OE_SGX)
+    add_subdirectory(cpuid)
     add_subdirectory(aesm)
     add_subdirectory(debugger)
     add_subdirectory(host_verify)
