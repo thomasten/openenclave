@@ -7,9 +7,13 @@
 # https://rix0r.nl/blog/2015/08/13/cmake-guide/
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-# Read version from "VERSION" file.
+# Read version from "VERSION" file, and prepare it for packaging versions
 file(STRINGS "VERSION" OE_VERSION_WITH_V)
 string(REGEX REPLACE "^v" "" OE_VERSION ${OE_VERSION_WITH_V})
+if (WIN32)
+  # NuGet packages expect semantic versioning, whereas Debian packages do not.
+  string(REGEX REPLACE "~" "-" OE_VERSION ${OE_VERSION})
+endif ()
 
 # Select the assembler
 # TODO: See #755: This should probably be removed
