@@ -37,7 +37,7 @@ def WindowsPackaging(String build_type) {
                         cmake.exe ${WORKSPACE} -G Ninja -DCMAKE_BUILD_TYPE=${build_type} -DBUILD_ENCLAVES=ON -DHAS_QUOTE_PROVIDER=ON -DNUGET_PACKAGE_PATH=C:/openenclave/prereqs/nuget -DCPACK_GENERATOR=NuGet -Wdev && \
                         ninja.exe && \
                         ctest.exe -V -C RELEASE --timeout ${CTEST_TIMEOUT_SECONDS} && \
-                        cpack && \
+                        ninja.exe package && \
                         cpack -D CPACK_NUGET_COMPONENT_INSTALL=ON -DCPACK_COMPONENTS_ALL=OEHOSTVERIFY
                         """
                 }
